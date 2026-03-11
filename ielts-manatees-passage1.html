@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Reading – Passage 1: Manatees</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f2ede4;--surface:#faf8f3;--surface2:#fff;--border:#ddd5c0;
+  --text:#1e1a12;--muted:#7a7060;--accent:#1a5c3a;--accent2:#c8860a;
+  --red:#b03020;--red-light:#fdecea;--green:#1a6b38;--green-light:#e4f4eb;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+header{background:var(--accent);color:#fff;padding:0 2rem;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,0.2);}
+header h1{font-family:'Playfair Display',serif;font-size:1.05rem;letter-spacing:0.02em;}
+#timer-display{font-size:1.15rem;font-weight:700;font-variant-numeric:tabular-nums;background:rgba(255,255,255,0.15);padding:0.25rem 0.9rem;border-radius:6px;letter-spacing:0.1em;}
+#timer-display.warning{background:rgba(220,60,40,0.5);}
+.hdr-btns{display:flex;gap:0.5rem;align-items:center;}
+.btn-sm{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:0.3rem 0.9rem;border-radius:5px;font-size:0.8rem;font-weight:600;cursor:pointer;}
+.btn-sm:hover{background:rgba(255,255,255,0.28);}
+.btn-submit-hdr{background:var(--accent2);border:none;color:#fff;padding:0.35rem 1.1rem;border-radius:5px;font-size:0.85rem;font-weight:700;cursor:pointer;}
+.btn-submit-hdr:hover{background:#a06d08;}
+
+#progress-bar{height:3px;background:#c5bfb0;}
+#progress-fill{height:100%;background:var(--accent2);width:0%;transition:width 0.4s;}
+
+main{max-width:1280px;margin:0 auto;padding:1.5rem 1rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+@media(max-width:860px){main{grid-template-columns:1fr;}}
+
+.panel{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1.6rem;overflow-y:auto;max-height:calc(100vh - 52px - 3px - 3rem);}
+.panel h2{font-family:'Playfair Display',serif;font-size:1.25rem;margin-bottom:0.3rem;color:var(--accent);}
+.passage-subtitle{font-size:0.78rem;color:var(--muted);margin-bottom:1rem;padding-bottom:0.7rem;border-bottom:1px solid var(--border);font-style:italic;}
+
+.passage-text p{font-family:'Source Serif 4',serif;font-size:0.93rem;line-height:1.85;margin-bottom:0.9rem;color:var(--text);user-select:text;}
+
+.q-section-title{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin:1.6rem 0 0.4rem;display:flex;align-items:center;gap:0.5rem;}
+.q-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.q-section-title:first-child{margin-top:0;}
+.instruction{font-size:0.83rem;color:var(--muted);margin-bottom:1rem;line-height:1.55;background:#fef9ed;border-left:3px solid var(--accent2);padding:0.55rem 0.8rem;border-radius:0 5px 5px 0;}
+
+/* Notes-style Q1-6 */
+.notes-block{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.2rem;margin-bottom:1rem;}
+.notes-heading{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--accent);margin-bottom:0.6rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border);}
+.notes-item{font-family:'Source Serif 4',serif;font-size:0.88rem;line-height:2.1;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 0.3rem;margin-bottom:0.15rem;padding-left:0.8rem;position:relative;}
+.notes-item::before{content:'•';position:absolute;left:0;color:var(--accent2);}
+
+.fill-input{display:inline-block;width:120px;border:none;border-bottom:2px solid #b5a98a;background:#fff;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:var(--text);padding:0.12rem 0.4rem;outline:none;border-radius:3px 3px 0 0;transition:border-color 0.2s,background 0.2s;vertical-align:baseline;}
+.fill-input:focus{border-color:var(--accent);background:#edf6f0;}
+.q-badge{display:inline-block;background:var(--accent2);color:#fff;font-size:0.65rem;font-weight:700;padding:0.1rem 0.35rem;border-radius:3px;margin-right:0.2rem;vertical-align:middle;letter-spacing:0.04em;}
+
+/* TFN questions */
+.q-item{margin-bottom:0.85rem;padding:0.85rem 1rem;border:1px solid var(--border);border-radius:7px;background:var(--surface);transition:border-color 0.2s;}
+.q-num{font-size:0.7rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.3rem;}
+.q-text{font-size:0.88rem;line-height:1.55;margin-bottom:0.5rem;font-family:'Source Serif 4',serif;}
+.opt-group{display:flex;gap:0.4rem;flex-wrap:wrap;}
+.opt-btn{border:1.5px solid var(--border);background:var(--surface2);color:var(--text);padding:0.28rem 0.8rem;border-radius:5px;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.opt-btn:hover{border-color:var(--accent);color:var(--accent);}
+.opt-btn.selected{background:var(--accent);color:#fff;border-color:var(--accent);}
+
+.btn-submit-main{background:var(--accent);color:#fff;padding:0.65rem 2rem;font-size:0.95rem;border-radius:7px;border:none;cursor:pointer;font-weight:600;display:block;margin:2rem auto 0;}
+.btn-submit-main:hover{background:#134a2e;}
+
+/* Highlight */
+#hl-toolbar{display:none;position:fixed;z-index:9999;background:#1c1c1c;border-radius:8px;padding:0.38rem 0.55rem;gap:0.3rem;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,0.45);}
+#hl-toolbar.visible{display:flex;}
+.hl-cb{width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);cursor:pointer;flex-shrink:0;transition:transform 0.12s,border-color 0.12s;}
+.hl-cb:hover{transform:scale(1.25);border-color:#fff;}
+.hl-cb.active{border-color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,0.3);}
+.hl-sep{width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 0.1rem;}
+.hl-erase{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.22);color:#fff;cursor:pointer;font-size:0.74rem;padding:0.18rem 0.5rem;border-radius:4px;white-space:nowrap;font-family:'DM Sans',sans-serif;}
+.hl-erase:hover{background:rgba(220,60,40,0.35);}
+mark.hl{background:none;border-radius:2px;padding:0 1px;cursor:pointer;}
+mark.hl:hover{opacity:0.72;}
+mark.hl-y{background:#ffe066;}
+mark.hl-g{background:#a8f0b8;}
+mark.hl-b{background:#a8d8f0;}
+mark.hl-p{background:#f0a8d0;}
+
+/* Results */
+#result-panel{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:300;align-items:center;justify-content:center;}
+#result-panel.show{display:flex;}
+.result-box{background:var(--surface2);border-radius:14px;padding:2rem 1.8rem;max-width:580px;width:93%;max-height:88vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,0.35);}
+.result-box h2{font-family:'Playfair Display',serif;color:var(--accent);font-size:1.4rem;margin-bottom:0.3rem;}
+.score-big{font-size:2.8rem;font-weight:700;color:var(--accent);line-height:1;}
+.score-sub{color:var(--muted);font-size:0.88rem;margin-bottom:1.2rem;}
+.r-section{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin:1rem 0 0.3rem;}
+.result-row{display:flex;align-items:center;gap:0.6rem;padding:0.42rem 0;border-bottom:1px solid var(--border);font-size:0.84rem;}
+.result-row:last-child{border-bottom:none;}
+.rq{min-width:26px;font-weight:700;color:var(--muted);}
+.r-your{min-width:110px;}
+.r-correct{color:var(--green);font-weight:600;}
+.badge{display:inline-block;padding:0.12rem 0.45rem;border-radius:4px;font-size:0.72rem;font-weight:700;}
+.badge.ok{background:var(--green-light);color:var(--green);}
+.badge.no{background:var(--red-light);color:var(--red);}
+.close-result{margin-top:1.4rem;background:var(--accent);color:#fff;border:none;padding:0.55rem 1.5rem;border-radius:7px;cursor:pointer;font-weight:600;font-size:0.9rem;display:block;margin-left:auto;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>IELTS Reading – Passage 1: Manatees</h1>
+  <div id="timer-display">20:00</div>
+  <div class="hdr-btns">
+    <button class="btn-sm" onclick="location.reload()">↺ Reset</button>
+    <button class="btn-submit-hdr" onclick="submitTest()">Submit</button>
+  </div>
+</header>
+<div id="progress-bar"><div id="progress-fill"></div></div>
+
+<main>
+  <!-- PASSAGE -->
+  <div class="panel" id="passage-panel">
+    <h2>Manatees</h2>
+    <div class="passage-subtitle">You should spend about 20 minutes on Questions 1–13</div>
+    <div class="passage-text">
+      <p>Manatees, also known as sea cows, are aquatic mammals that belong to a group of animals called Sirenia. This group also contains dugongs. Dugongs and manatees look quite alike — they are similar in size, colour and shape, and both have flexible flippers for forelimbs. However, the manatee has a broad, rounded tail, whereas the dugong's is fluked, like that of a whale. There are three species of manatees: the West Indian manatee (<em>Trichechus manatus</em>), the African manatee (<em>Trichechus senegalensis</em>) and the Amazonian manatee (<em>Trichechus inunguis</em>).</p>
+      <p>Unlike most mammals, manatees have only six bones in their neck — most others, including humans and giraffes, have seven. This short neck allows a manatee to move its head up and down, but not side to side. To see something on its left or its right, a manatee must turn its entire body, steering with its flippers. Manatees have pectoral flippers but no back limbs, only a tail for propulsion. They do have pelvic bones, however — a leftover from their evolution from a four-legged to a fully aquatic animal. Manatees share some visual similarities to elephants. Like elephants, manatees have thick, wrinkled skin. They also have some hairs covering their bodies which help them sense vibrations in the water around them.</p>
+      <p>Seagrasses and other marine plants make up most of a manatee's diet. Manatees spend about eight hours each day grazing and uprooting plants. They eat up to 15% of their weight in food each day. African manatees are omnivorous — studies have shown that molluscs and fish make up a small part of their diets. West Indian and Amazonian manatees are both herbivores.</p>
+      <p>Manatees' teeth are all molars — flat, rounded teeth for grinding food. Due to manatees' abrasive aquatic plant diet, these teeth get worn down and they eventually fall out, so they continually grow new teeth that get pushed forward to replace the ones they lose. Instead of having incisors to grasp their food, manatees have lips which function like a pair of hands to help tear food away from the seafloor.</p>
+      <p>Manatees are fully aquatic, but as mammals, they need to come up to the surface to breathe. When awake, they typically surface every two to four minutes, but they can hold their breath for much longer. Adult manatees sleep underwater for 10–12 hours a day, but they come up for air every 15–20 minutes. Active manatees need to breathe more frequently. It's thought that manatees use their muscular diaphragm and breathing to adjust their buoyancy. They may use diaphragm contractions to compress and store gas in folds in their large intestine to help them float.</p>
+      <p>The West Indian manatee reaches about 3.5 metres long and weighs on average around 500 kilogrammes. It moves between fresh water and salt water, taking advantage of coastal mangroves and coral reefs, rivers, lakes and inland lagoons. There are two subspecies of West Indian manatee: the Antillean manatee is found in waters from the Bahamas to Brazil, whereas the Florida manatee is found in US waters, although some individuals have been recorded in the Bahamas. In winter, the Florida manatee is typically restricted to Florida. When the ambient water temperature drops below 20ºC, it takes refuge in naturally and artificially warmed water, such as at the warm-water outfalls from powerplants.</p>
+      <p>The African manatee is also about 3.5 metres long and found in the sea along the west coast of Africa, from Mauritania down to Angola. The species also makes use of rivers, with the mammals seen in landlocked countries such as Mali and Niger.</p>
+      <p>The Amazonian manatee is the smallest species, though it is still a big animal. It grows to about 2.5 metres long and 350 kilogrammes. Amazonian manatees favour calm, shallow waters that are above 23ºC. This species is found in fresh water in the Amazon Basin in Brazil, as well as in Colombia, Ecuador and Peru. All three manatee species are endangered or at a heightened risk of extinction. The African manatee and Amazonian manatee are both listed as Vulnerable by the International Union for Conservation of Nature (IUCN). It is estimated that 140,000 Amazonian manatees were killed between 1935 and 1954 for their meat, fat and skin, with the latter used to make leather. In more recent years, African manatee decline has been tied to incidental capture in fishing nets and hunting. Manatee hunting is now illegal in every country the African species is found in.</p>
+      <p>The two subspecies of West Indian manatee are listed as Endangered by the IUCN. Both are also expected to undergo a decline of 20% over the next 40 years. A review of almost 1,800 cases of entanglement in fishing nets and of plastic consumption among marine mammals in US waters from 2009 to 2020 found that at least 700 cases involved manatees. The chief cause of death in Florida manatees is boat strikes. However, laws in certain parts of Florida now limit boat speeds during winter, allowing slow-moving manatees more time to respond.</p>
+    </div>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div class="panel">
+
+    <!-- Q1-6: Notes completion -->
+    <div class="q-section-title">Questions 1–6 · Complete the Notes</div>
+    <div class="instruction">Choose <strong>ONE WORD AND/OR A NUMBER</strong> from the passage for each answer.</div>
+
+    <div class="notes-block">
+      <div class="notes-heading">Manatees</div>
+
+      <div class="notes-heading" style="font-size:0.82rem;margin-top:0.5rem;">Appearance</div>
+      <div class="notes-item">
+        look similar to dugongs, but with a differently shaped
+        <span class="q-badge">Q1</span>
+        <input class="fill-input" data-q="1" type="text" placeholder="answer" autocomplete="off"/>
+      </div>
+
+      <div class="notes-heading" style="font-size:0.82rem;margin-top:0.8rem;">Movement</div>
+      <div class="notes-item">have fewer neck bones than most mammals</div>
+      <div class="notes-item">
+        need to use their
+        <span class="q-badge">Q2</span>
+        <input class="fill-input" data-q="2" type="text" placeholder="answer" autocomplete="off"/>
+        to help turn their bodies in order to look sideways
+      </div>
+      <div class="notes-item">
+        sense vibrations in the water by means of
+        <span class="q-badge">Q3</span>
+        <input class="fill-input" data-q="3" type="text" placeholder="answer" autocomplete="off"/>
+        on their skin
+      </div>
+
+      <div class="notes-heading" style="font-size:0.82rem;margin-top:0.8rem;">Feeding</div>
+      <div class="notes-item">
+        eat mainly aquatic vegetation, such as
+        <span class="q-badge">Q4</span>
+        <input class="fill-input" data-q="4" type="text" placeholder="answer" autocomplete="off"/>
+      </div>
+      <div class="notes-item">
+        grasp and pull up plants with their
+        <span class="q-badge">Q5</span>
+        <input class="fill-input" data-q="5" type="text" placeholder="answer" autocomplete="off"/>
+      </div>
+
+      <div class="notes-heading" style="font-size:0.82rem;margin-top:0.8rem;">Breathing</div>
+      <div class="notes-item">come to the surface for air every 2–4 minutes when awake and every 15–20 while sleeping</div>
+      <div class="notes-item">
+        may regulate the
+        <span class="q-badge">Q6</span>
+        <input class="fill-input" data-q="6" type="text" placeholder="answer" autocomplete="off"/>
+        of their bodies by using muscles of diaphragm to store air internally
+      </div>
+    </div>
+
+    <!-- Q7-13: TFN -->
+    <div class="q-section-title">Questions 7–13 · True / False / Not Given</div>
+    <div class="instruction">Do the following statements agree with the information given in Reading Passage 1? Choose <strong>TRUE</strong>, <strong>FALSE</strong>, or <strong>NOT GIVEN</strong>.</div>
+
+    <div class="q-item"><div class="q-num">Q7</div>
+      <div class="q-text">West Indian manatees can be found in a variety of different aquatic habitats.</div>
+      <div class="opt-group" data-q="7"><button class="opt-btn" data-val="TRUE">TRUE</button><button class="opt-btn" data-val="FALSE">FALSE</button><button class="opt-btn" data-val="NOT GIVEN">NOT GIVEN</button></div></div>
+
+    <div class="q-item"><div class="q-num">Q8</div>
+      <div class="q-text">The Florida manatee lives in warmer waters than the Antillean manatee.</div>
+      <div class="opt-group" data-q="8"><button class="opt-btn" data-val="TRUE">TRUE</button><button class="opt-btn" data-val="FALSE">FALSE</button><button class="opt-btn" data-val="NOT GIVEN">NOT GIVEN</button></div></div>
+
+    <div class="q-item"><div class="q-num">Q9</div>
+      <div class="q-text">The African manatee's range is limited to coastal waters between the West African countries of Mauritania and Angola.</div>
+      <div class="opt-group" data-q="9"><button class="opt-btn" data-val="TRUE">TRUE</button><button class="opt-btn" data-val="FALSE">FALSE</button><button class="opt-btn" data-val="NOT GIVEN">NOT GIVEN</button></div></div>
+
+    <div class="q-item"><div class="q-num">Q10</div>
+      <div class="q-text">The extent of the loss of Amazonian manatees in the mid-twentieth century was only revealed many years later.</div>
+      <div class="opt-group" data-q="10"><button class="opt-btn" data-val="TRUE">TRUE</button><button class="opt-btn" data-val="FALSE">FALSE</button><button class="opt-btn" data-val="NOT GIVEN">NOT GIVEN</button></div></div>
+
+    <div class="q-item"><div class="q-num">Q11</div>
+      <div class="q-text">It is predicted that West Indian manatee populations will fall in the coming decades.</div>
+      <div class="opt-group" data-q="11"><button class="opt-btn" data-val="TRUE">TRUE</button><button class="opt-btn" data-val="FALSE">FALSE</button><button class="opt-btn" data-val="NOT GIVEN">NOT GIVEN</button></div></div>
+
+    <div class="q-item"><div class="q-num">Q12</div>
+      <div class="q-text">The risk to manatees from entanglement and plastic consumption increased significantly in the period 2009–2020.</div>
+      <div class="opt-group" data-q="12"><button class="opt-btn" data-val="TRUE">TRUE</button><button class="opt-btn" data-val="FALSE">FALSE</button><button class="opt-btn" data-val="NOT GIVEN">NOT GIVEN</button></div></div>
+
+    <div class="q-item"><div class="q-num">Q13</div>
+      <div class="q-text">There is some legislation in place which aims to reduce the likelihood of boat strikes on manatees in Florida.</div>
+      <div class="opt-group" data-q="13"><button class="opt-btn" data-val="TRUE">TRUE</button><button class="opt-btn" data-val="FALSE">FALSE</button><button class="opt-btn" data-val="NOT GIVEN">NOT GIVEN</button></div></div>
+
+    <button class="btn-submit-main" onclick="submitTest()">Submit Answers</button>
+  </div>
+</main>
+
+<!-- Highlight toolbar -->
+<div id="hl-toolbar">
+  <button class="hl-cb active" data-c="hl-y" title="Yellow" style="background:#ffe066"></button>
+  <button class="hl-cb" data-c="hl-g" title="Green" style="background:#a8f0b8"></button>
+  <button class="hl-cb" data-c="hl-b" title="Blue" style="background:#a8d8f0"></button>
+  <button class="hl-cb" data-c="hl-p" title="Pink" style="background:#f0a8d0"></button>
+  <div class="hl-sep"></div>
+  <button class="hl-erase" id="hl-erase">✕ erase</button>
+</div>
+
+<!-- Results -->
+<div id="result-panel">
+  <div class="result-box">
+    <h2>Your Results – Manatees</h2>
+    <div class="score-big" id="score-num">0/13</div>
+    <div class="score-sub" id="score-band">Estimated Band</div>
+    <div id="result-rows"></div>
+    <button class="close-result" onclick="document.getElementById('result-panel').classList.remove('show')">Close</button>
+  </div>
+</div>
+
+<script>
+const ANSWERS = {
+  1:'tail', 2:'flippers', 3:'hairs', 4:'seagrasses', 5:'lips', 6:'buoyancy',
+  7:'TRUE', 8:'NOT GIVEN', 9:'FALSE', 10:'NOT GIVEN', 11:'TRUE', 12:'NOT GIVEN', 13:'TRUE'
+};
+const TOTAL = 13;
+const userAnswers = {};
+
+let timeLeft = 20*60;
+const timerEl = document.getElementById('timer-display');
+const timerInt = setInterval(()=>{
+  timeLeft--;
+  timerEl.textContent = String(Math.floor(timeLeft/60)).padStart(2,'0')+':'+String(timeLeft%60).padStart(2,'0');
+  if(timeLeft<=120) timerEl.classList.add('warning');
+  if(timeLeft<=0){clearInterval(timerInt);submitTest();}
+  document.getElementById('progress-fill').style.width=(Object.keys(userAnswers).length/TOTAL*100)+'%';
+},1000);
+
+document.querySelectorAll('.fill-input').forEach(inp=>{
+  inp.addEventListener('input',()=>{
+    if(inp.value.trim()) userAnswers[inp.dataset.q]=inp.value.trim();
+    else delete userAnswers[inp.dataset.q];
+    document.getElementById('progress-fill').style.width=(Object.keys(userAnswers).length/TOTAL*100)+'%';
+  });
+});
+
+document.querySelectorAll('.opt-group').forEach(g=>{
+  g.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      g.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      userAnswers[g.dataset.q]=btn.dataset.val;
+      document.getElementById('progress-fill').style.width=(Object.keys(userAnswers).length/TOTAL*100)+'%';
+    });
+  });
+});
+
+function submitTest(){
+  clearInterval(timerInt);
+  let correct=0, rows='';
+  rows+='<div class="r-section">Notes Completion · Q1–6</div>';
+  for(let q=1;q<=6;q++){
+    const ok=(userAnswers[q]||'').trim().toLowerCase()===ANSWERS[q].toLowerCase();
+    if(ok) correct++;
+    rows+=`<div class="result-row"><span class="rq">${q}</span><span class="r-your">${userAnswers[q]||'<em style="color:#aaa">—</em>'}</span><span class="r-correct">✓ ${ANSWERS[q]}</span><span class="badge ${ok?'ok':'no'}">${ok?'✓':'✗'}</span></div>`;
+  }
+  rows+='<div class="r-section">True / False / Not Given · Q7–13</div>';
+  for(let q=7;q<=13;q++){
+    const ok=(userAnswers[q]||'').trim().toLowerCase()===ANSWERS[q].toLowerCase();
+    if(ok) correct++;
+    rows+=`<div class="result-row"><span class="rq">${q}</span><span class="r-your">${userAnswers[q]||'<em style="color:#aaa">—</em>'}</span><span class="r-correct">✓ ${ANSWERS[q]}</span><span class="badge ${ok?'ok':'no'}">${ok?'✓':'✗'}</span></div>`;
+  }
+  const band=correct>=12?'8.5–9.0':correct>=10?'7.5–8.0':correct>=8?'6.5–7.0':correct>=6?'6.0':correct>=4?'5.5':'5.0';
+  document.getElementById('score-num').textContent=correct+'/'+TOTAL;
+  document.getElementById('score-band').textContent='Estimated Band: '+band;
+  document.getElementById('result-rows').innerHTML=rows;
+  document.getElementById('result-panel').classList.add('show');
+}
+
+// Highlight
+const hlT=document.getElementById('hl-toolbar');
+const passP=document.getElementById('passage-panel');
+const HLC=['hl-y','hl-g','hl-b','hl-p'];
+let hlColor='hl-y',hlRange=null,hlMark=null;
+
+hlT.addEventListener('mousedown',e=>e.preventDefault());
+
+hlT.querySelectorAll('.hl-cb').forEach(btn=>{
+  btn.addEventListener('click',e=>{
+    e.stopPropagation();
+    hlT.querySelectorAll('.hl-cb').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    hlColor=btn.dataset.c;
+    if(hlMark){HLC.forEach(c=>hlMark.classList.remove(c));hlMark.classList.add(hlColor);hlMark=null;hideHL();}
+    else if(hlRange){applyHL(hlRange,hlColor);hlRange=null;hideHL();}
+  });
+});
+
+document.getElementById('hl-erase').addEventListener('click',e=>{
+  e.stopPropagation();
+  if(hlMark){const p=hlMark.parentNode;while(hlMark.firstChild)p.insertBefore(hlMark.firstChild,hlMark);p.removeChild(hlMark);p.normalize();hlMark=null;}
+  else if(hlRange){eraseHL(hlRange);hlRange=null;}
+  hideHL();
+});
+
+function posHL(x,y){
+  hlT.classList.add('visible');
+  const tw=hlT.offsetWidth||220;
+  hlT.style.left=Math.max(8,Math.min(x-tw/2,window.innerWidth-tw-8))+'px';
+  hlT.style.top=(y+window.scrollY-54)+'px';
+}
+function hideHL(){hlT.classList.remove('visible');hlRange=null;hlMark=null;window.getSelection()?.removeAllRanges();}
+
+function attachMark(mark){
+  mark.addEventListener('click',e=>{
+    e.stopPropagation();hlMark=mark;hlRange=null;
+    const cur=HLC.find(c=>mark.classList.contains(c));
+    hlT.querySelectorAll('.hl-cb').forEach(b=>b.classList.toggle('active',b.dataset.c===cur));
+    const r=mark.getBoundingClientRect();posHL(r.left+r.width/2,r.top);
+  });
+}
+
+document.addEventListener('mouseup',e=>{
+  if(hlT.contains(e.target)||e.target.tagName==='INPUT'||e.target.tagName==='BUTTON') return;
+  if(e.target.closest&&e.target.closest('.hl')) return;
+  setTimeout(()=>{
+    const sel=window.getSelection();
+    if(!sel||sel.isCollapsed||!sel.toString().trim()){hideHL();return;}
+    const range=sel.getRangeAt(0);
+    if(!passP.contains(range.commonAncestorContainer)){hideHL();return;}
+    hlMark=null;hlRange=range.cloneRange();
+    const rect=range.getBoundingClientRect();posHL(rect.left+rect.width/2,rect.top);
+  },10);
+});
+
+document.addEventListener('mousedown',e=>{
+  if(e.target.tagName==='INPUT'||hlT.contains(e.target)) return;
+  if(e.target.closest&&e.target.closest('.hl')) return;
+  if(!passP.contains(e.target)) hideHL();
+});
+
+function applyHL(range,cls){
+  try{
+    const frag=range.extractContents();
+    frag.querySelectorAll('.hl').forEach(m=>{while(m.firstChild)m.parentNode.insertBefore(m.firstChild,m);m.remove();});
+    const mark=document.createElement('mark');
+    mark.className='hl '+cls;
+    mark.appendChild(frag);
+    attachMark(mark);
+    range.insertNode(mark);
+    mark.parentNode.normalize();
+  }catch(e){}
+  window.getSelection()?.removeAllRanges();
+}
+
+function eraseHL(range){
+  try{
+    const frag=range.extractContents();
+    frag.querySelectorAll('.hl').forEach(m=>{while(m.firstChild)(m.parentNode||frag).insertBefore(m.firstChild,m);m.remove();});
+    range.insertNode(frag);
+  }catch(e){}
+  window.getSelection()?.removeAllRanges();
+}
+</script>
+</body>
+</html>
